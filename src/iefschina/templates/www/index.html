@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block banner %}
-	{% for column in channels|slice(2) %}
+	{% for column in channels[:4]|slice(2) %}
 	<div class="row">
 	    {% for channel in column %}
 	        <div class="col-xs-6">
