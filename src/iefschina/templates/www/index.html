@@ -1,0 +1,35 @@
+{% extends "www/base.html" %}
+
+{% block head %}
+	<link rel="stylesheet" href="{{ versioning('styles/index.css') }}">
+{% endblock %}
+
+{% block banner %}
+	{% for column in channels|slice(2) %}
+	<div class="row">
+	    {% for channel in column %}
+	        <div class="col-xs-6">
+	            <div class="panel panel-primary">
+	                <div class="panel-heading">
+	                    <h3 class="panel-title pull-left">{{ channel.name }}</h3>
+	                    <a class="panel-title pull-right" href="{{ channel.url }}" target="_blank">More</a>
+	                    <div class="clearfix"></div>
+	                </div>
+	                <div class="panel-body">
+	                    <table class="table">
+	                    <tbody>
+	                        {% for article in channel.articles[:5] %}
+	                        <tr>
+	                            <td><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></td>
+	                            <td>{{ article.date_published|strfdate }}</td>
+	                        </tr>
+	                        {% endfor %}
+	                    </tbody>
+	                    </table>
+	                </div>
+	            </div>
+	        </div>
+	    {% endfor %}
+	</div>
+	{% endfor %}
+{% endblock %}

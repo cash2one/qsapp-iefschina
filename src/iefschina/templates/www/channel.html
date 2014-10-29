@@ -1,0 +1,36 @@
+{% extends "www/base.html" %}
+
+
+{% block head %}
+	<link rel="stylesheet" href="{{ versioning('styles/channel.css') }}">
+{% endblock %}
+
+{% block main %}
+	<div class="panel panel-primary">
+	    <div class="panel-heading">
+	        <h3 class="panel-title">{{ channel.name }}</h3>
+	    </div>
+	    <div class="panel-body">
+	        <table class="table">
+	        <tbody>
+	            {% for article in channel.articles[(pager.page-1)*pager.per_page:pager.page*pager.per_page] %}
+	            <a href="{{ article.url }}" target="_blank">
+	            <tr>
+	                <td><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></td>
+	                <td>{{ article.date_published|strfdate }}</td>
+	            </tr>
+	            </a>
+	            {% endfor %}
+	        </tbody>
+	        </table>
+	    </div>
+	</div>
+
+	<div class="row">
+		{{ pager.links|safe }}
+	</div>
+{% endblock %}
+
+{% block side %}
+	{{ render_event(language) }}
+{% endblock %}

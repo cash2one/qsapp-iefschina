@@ -1,0 +1,11 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
+
+DEBUG = True
+SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://iefschina:iiii@localhost/iefschina'
+
+SERVER_NAME = 'www.iefschina.com:18000'
+
+UWSGI_SOCKET = '0.0.0.0:17003'
+UWSGI_MODULE  = 'iefschina:app'

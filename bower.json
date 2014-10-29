@@ -1,0 +1,13 @@
+{
+  "name": "iefschina",
+  "private": true,
+  "dependencies": {
+    "bootstrap-sass-official": "~3.1.1",
+    "modernizr": "~2.6.2",
+    "jquery": "~1.11.0",
+    "headroom.js": "~0.7.0",
+    "unslider": "~1.0.0",
+    "jquery.event.swipe": "~0.5.2"
+  },
+  "devDependencies": {}
+}

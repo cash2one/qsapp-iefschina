@@ -1,0 +1,33 @@
+{% extends "www/base.html" %}
+
+
+{% block head %}
+	<link rel="stylesheet" href="{{ versioning('styles/index.css') }}">
+{% endblock %}
+
+{% block banner %}
+	<form id="search" class="hide">
+	    <input id="" class="" type="text" value="{{ kw }}" placeholder="频道 文章" maxlength="30" name="kw" />
+	    <input class="search-submit" value="搜索" type="submit" />
+	</form>
+
+	<div class="panel panel-default">
+	    <div class="panel-heading">
+	        <h3 class="panel-title">关于<strong class="text-info">{{ kw }}</strong>的搜索结果...</h3>
+	    </div>
+	    <div class="panel-body">
+	        <table class="table">
+	        <tbody>
+	            {% for article in result[:20] %}
+	            <a href="{{ article.url }}" target="_blank">
+	            <tr>
+	                <td><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></td>
+	                <td>{{ article.date_published|strfdate }}</td>
+	            </tr>
+	            </a>
+	            {% endfor %}
+	        </tbody>
+	        </table>
+	    </div>
+	</div>
+{% endblock %}
