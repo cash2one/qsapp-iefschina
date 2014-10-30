@@ -3,10 +3,17 @@ from __future__ import unicode_literals
 
 from flask import render_template_string
 from jinja2 import Markup
-from ..models import NaviModel, SlideModel, ArticleModel
+from iefschina.models import NaviModel, SlideModel, ArticleModel
 
+
+REGEX = r'[a-zA-Z\b]+'
 
 navi_str = '''
+{% if language=='cn' %}
+    <li class=""><a href="{{ url_for('views.index', language='cn') }}">首页</a></li>
+{% else %}
+    <li class=""><a href="{{ url_for('views.index', language='en') }}">Homepage</a></li>
+{% endif %}
 {% for channel in navi.channels %}
     <li class=""><a href="{{ channel.url }}">{{ channel.name }}</a></li>
 {% endfor %}
@@ -52,9 +59,12 @@ event_str = '''
 </div>
 '''
 
-def render_navi(navi_id):
-    navi = NaviModel.query.get(1)
-    return Markup(render_template_string(navi_str, navi=navi))
+def render_navi(language='cn'):
+    navi_id = 1 if language=='cn' else 2
+    navi = NaviModel.query.get(navi_id)
+    return Markup(render_template_string(navi_str,
+                                         navi=navi,
+                                         language=language))
 
 
 def render_slide():

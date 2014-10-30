@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import re
 from jinja2 import Markup
 from flask import url_for
 from studio.core.engines import db
 from sqlalchemy.ext.hybrid import hybrid_property
-from microsite.models.article import ArticleModel
 
+from iefschina.models.article import ArticleModel
+#from iefschina.contrib.helpers import REGEX
+REGEX = r'[a-zA-Z\b]+'
 
 __all__ = [
     'NaviChannelModel',
@@ -85,6 +88,14 @@ class ChannelModel(db.Model):
         passive_deletes='all', lazy='dynamic')
 
     @property
+    def language(self):
+        c = re.compile(REGEX)
+        if c.match(self.name):
+            return 'en'
+        else:
+            return 'cn'
+
+    @property
     def url(self):
         return url_for("views.channel", cid=self.id)
 
@@ -92,9 +103,9 @@ class ChannelModel(db.Model):
     def get_channel_query(cls, language='all'):
         query = cls.query
         if language == 'cn':
-            query = query.filter("name !~ '[a-zA-Z\b]+'")
+            query = query.filter("name !~ '%s'" % REGEX)
         elif language == 'en':
-            query = cls.query.filter("name ~ '[a-zA-Z\b]+'")
+            query = cls.query.filter("name ~ '%s'" % REGEX)
 
         return query
 

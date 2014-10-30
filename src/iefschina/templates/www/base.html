@@ -39,8 +39,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url_for('views.index', language='cn') }}">
-                    <span class="glyphicon glyphicon-plane"></span>
+                <a class="navbar-brand" href="{{ url_for('views.welcome') }}">
+                    <span class="glyphicon glyphicon-globe"></span>
                     <img class="hide" alt="Brand" height="24" src="{{ versioning('fav.ico') }}">
                 </a>
             </div>
@@ -48,15 +48,15 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     {% block navitems %}
-                        {{ render_navi(1) }}
+                        {{ render_navi(language=language) }}
                     {% endblock %}
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right" >
                     <li class="">
                         <div class="navbar-btn-group btn-group">
-                            <a class="btn btn-primary" href="{{ url_for('views.index', language='cn') }}">中文</a>
-                            <a class="btn btn-primary" href="{{ url_for('views.index', language='en') }}">ENGLISH</a>
+                            <a class="btn btn-primary {% if language!='en' %}active{% endif %}" href="{{ url_for('views.index', language='cn') }}">中文</a>
+                            <a class="btn btn-primary {% if language=='en' %}active{% endif %}" href="{{ url_for('views.index', language='en') }}">ENGLISH</a>
                         </div>
                     </li>
                 </ul>

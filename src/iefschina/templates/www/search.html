@@ -1,5 +1,9 @@
 {% extends "www/base.html" %}
 
+{% macro display_language(lang) %}
+    {% if lang == 'en' %}[ENGLISH]{% else %}[中文]{% endif %}
+{% endmacro %}
+
 
 {% block head %}
 	<link rel="stylesheet" href="{{ versioning('styles/index.css') }}">
@@ -21,7 +25,7 @@
 	            {% for article in result[:20] %}
 	            <a href="{{ article.url }}" target="_blank">
 	            <tr>
-	                <td><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></td>
+	                <td><a href="{{ article.url }}" target="_blank">{{ display_language(article.language) }}{{ article.title }}</a></td>
 	                <td>{{ article.date_published|strfdate }}</td>
 	            </tr>
 	            </a>

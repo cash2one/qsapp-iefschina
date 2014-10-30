@@ -2,14 +2,16 @@
 
 from __future__ import unicode_literals
 
+import re
 from flask import url_for
 from jinja2 import Markup
 from sqlalchemy import sql
 from sqlalchemy.sql.expression import func
-
-from studio.core.engines import db
 from sqlalchemy.ext.hybrid import hybrid_property
 
+from studio.core.engines import db
+#from iefschina.contrib.helpers import REGEX
+REGEX = r'[a-zA-Z\b]+'
 
 __all__ = [
     'SlideModel',
@@ -54,6 +56,14 @@ class ArticleModel(db.Model):
             primaryjoin='ArticleModel.id==ArticleContentModel.id',
             foreign_keys='[ArticleContentModel.id]',
             uselist=False, cascade='all, delete-orphan')
+
+    @property
+    def language(self):
+        c = re.compile(REGEX)
+        if c.match(self.title):
+            return 'en'
+        else:
+            return 'cn'
 
     @property
     def url(self):

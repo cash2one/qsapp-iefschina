@@ -32,6 +32,7 @@ class ChannelView(views.MethodView):
         return render_template('www/channel.html',
                                 channels=query.all(),
                                 channel=channel,
+                                language=channel.language,
                                 pager=pager)
 
 

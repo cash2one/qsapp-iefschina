@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import re
 from flask import views, render_template
 from iefschina.blueprints import blueprint_www
 
 
-from iefschina.models import ChannelModel, ArticleModel
+from iefschina.models import ArticleModel
 
 
 class ArticleView(views.MethodView):
@@ -16,7 +15,8 @@ class ArticleView(views.MethodView):
 
     def get(self, aid):
         article = ArticleModel.query.get(aid)
-        return render_template('www/article.html', article=article)
+        return render_template('www/article.html', article=article,
+                                                   language=article.language)
 
 
 blueprint_www.add_url_rule('/article/<int:aid>/',

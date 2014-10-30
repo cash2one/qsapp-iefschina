@@ -36,7 +36,8 @@ class IndexView(views.MethodView):
         else:
             channels = filter(lambda x: not re.match(r'[a-zA-Z\b]+', x.name),
                               channels)
-        return render_template('www/index.html', channels=channels)
+        return render_template('www/index.html', channels=channels,
+                                                 language=language)
 
 
 blueprint_www.add_url_rule('/l/<language>/',
