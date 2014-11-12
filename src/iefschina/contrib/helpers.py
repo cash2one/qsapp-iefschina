@@ -26,12 +26,12 @@ slide_str = '''
    	<ul>
    		{% for slide in slides %}
        	<li style="width: 25%; background-image: url({{ slide.image }}); background-size: 100% 100%;">
-            <a class="btn" href="{{ slide.link }}">
        		<div class="inner">
 				{% if slide.title %}<h1>{{ slide.title }}</h1>{% endif %}
 				{% if slide.describe %}<p>{{ slide.describe }}</p>{% endif %}
+                <a class="btn" href="{{ slide.link }}" target="_blank">&nbsp;</a>
 			</div>
-            </a>
+            
        	</li>
        	{% endfor %}
    	</ul>
