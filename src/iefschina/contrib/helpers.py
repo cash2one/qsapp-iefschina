@@ -3,7 +3,8 @@ from __future__ import unicode_literals
 
 from flask import render_template_string
 from jinja2 import Markup
-from iefschina.models import NaviModel, SlideModel, ArticleModel
+from sqlalchemy.sql.expression import func
+from iefschina.models import NaviModel, SlideModel, ChannelModel, ArticleModel
 
 
 REGEX = r'[a-zA-Z\b]+'
@@ -25,11 +26,12 @@ slide_str = '''
    	<ul>
    		{% for slide in slides %}
        	<li style="width: 25%; background-image: url({{ slide.image }}); background-size: 100% 100%;">
+            <a class="btn" href="{{ slide.link }}">
        		<div class="inner">
 				{% if slide.title %}<h1>{{ slide.title }}</h1>{% endif %}
 				{% if slide.describe %}<p>{{ slide.describe }}</p>{% endif %}
-				{% if slide.link %}<a class="btn" href="{{ slide.link }}">了解详情</a>{% endif %}
 			</div>
+            </a>
        	</li>
        	{% endfor %}
    	</ul>
@@ -59,6 +61,38 @@ event_str = '''
 </div>
 '''
 
+
+latest_str = '''
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            {% if language == 'cn' %}最新发布{% else %}Latest{% endif %}
+        </h3>
+    </div>
+    <div class="panel-body">
+        <table class="table">
+        <tbody>
+            {% for article in articles %}
+            <a href="{{ article.url }}" target="_blank">
+            <tr>
+                <td><a href="{{ article.url }}" target="_blank">
+                    {% if language == 'cn' %}
+                        {{ article.title|truncate(20, True) }}
+                    {% else %}
+                        {{ article.title|truncate(35, True) }}
+                    {% endif %}
+
+                </a></td>
+            </tr>
+            </a>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+</div>
+'''
+
+
 def render_navi(language='cn'):
     navi_id = 1 if language=='cn' else 2
     navi = NaviModel.query.get(navi_id)
@@ -76,3 +110,19 @@ def render_event(language='cn'):
     cids = [6, 8] if language == 'en' else [1, 3]
     query = ArticleModel.get_article_query(cids=cids, limit=5)
     return Markup(render_template_string(event_str, articles=query.all()))
+
+
+def render_latest(language='cn'):
+    query = ArticleModel.query.join(ChannelModel,
+                                    ChannelModel.id==ArticleModel.cid)
+    if language == 'cn':
+        query = query.filter("channel.name !~ '[a-zA-Z\b]+'")
+    else:
+        query = query.filter("channel.name ~ '[a-zA-Z\b]+'")
+    articles = (query.filter(ArticleModel.date_published<=func.now())
+                     .order_by(ArticleModel.date_published.desc())
+                     .limit(10))
+
+    return Markup(render_template_string(latest_str,
+                                         language=language,
+                                         articles=articles))

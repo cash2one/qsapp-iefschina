@@ -31,7 +31,7 @@ gulp.task('requirejs', function () {
         useStrict: true,
         wrap: true
     })
-    .pipe(gulp.dest(yo.prod));
+    .pipe(gulp.dest(yo.prod + '/scripts'));
 })
 
 gulp.task('scripts', ['requirejs'], function () {

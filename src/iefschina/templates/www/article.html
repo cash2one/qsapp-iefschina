@@ -8,7 +8,11 @@
 {% block banner %}
 	<div class="row">
 		<div class="main col-sm-12">
-			<h3 class="text-center">{{ article.title }}</h3>{{ article.date_published|strfdate }}
-		<div class="content">{{ article.html }}</div>
+			<h3 class="text-center" style="font-weight: bold;">{{ article.title }}</h3>
+			<p class="pull-right">{{ article.date_published|strfdate }}</p>
+			<br/><br/>
+		<div class="content thumbnail" style="padding: 20px;">
+			{{ article.html }}
+		</div>
 	</div>
 {% endblock %}

@@ -18,6 +18,11 @@
     {% endblock %}
 </head>
 <body>
+    <!--[if lt IE 9]>
+        <script src="https://brokerage-static.s3.amazonaws.com/assets/html5shiv/html5shiv.js"></script>
+        <script src="https://brokerage-static.s3.amazonaws.com/assets/respond/respond.min.js"></script>
+        <script src="https://brokerage-static.s3.amazonaws.com/assets/robinhood/js/bind-polyfill.js"></script>
+    <![endif]-->
     <!--[if lt IE 7]>
         <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
     <![endif]-->
@@ -121,16 +126,17 @@
     <footer class="footer">
         <div class="row">
             <div class="col-sm-1"></div>
-            <div class="col-sm-8" style="padding-top:50px;">
+            <div class="col-sm-6" style="padding-top:50px;">
                 <ul class="list-inline">
                     <li class="hide"><a href="">关于我们</a></li>
                     <li class="hide"><a href="">隐私政策</a></li>
                     <li class="hide"><a href="">联系我们</a></li>
                     <li class="hide"><a href="">新浪微薄</a></li>
                 </ul>
-                Copyright © 2014 qisanstudio  <a href="http://www.qisanstudio.com/" target="_blank">七三工作室</a>  版权所有 <a href="http://www.miibeian.gov.cn/" target="_blank">京ICP备10904820号</a>
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-4">
+                Copyright © 2014国际经济与金融学会（中国） 版权所有<br/>
+                本站由 <a href="http://www.qisanstudio.com/" target="_blank">七三工作室</a> 制作
             </div>
             <div class="col-sm-1"></div>
         </div>

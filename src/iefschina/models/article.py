@@ -59,11 +59,7 @@ class ArticleModel(db.Model):
 
     @property
     def language(self):
-        c = re.compile(REGEX)
-        if c.match(self.title):
-            return 'en'
-        else:
-            return 'cn'
+        return self.channel.language
 
     @property
     def url(self):

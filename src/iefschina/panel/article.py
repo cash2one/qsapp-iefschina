@@ -23,6 +23,7 @@ class Article(ModelView):
     column_list = ['id', 'channel', 'is_sticky', 'title',
                    'date_published', 'date_created']
     column_searchable_list = ['title', ]
+    column_filters = ['id', 'channel.name']
     column_default_sort = ('date_published', True)
     form_extra_fields = {
         'content': CKTextAreaField('内容',
