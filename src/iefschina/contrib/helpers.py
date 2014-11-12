@@ -60,7 +60,7 @@ event_str = '''
     </div>
 </div>
 '''
-
+ 
 
 latest_str = '''
 <div class="panel panel-default">
@@ -76,8 +76,8 @@ latest_str = '''
             <a href="{{ article.url }}" target="_blank">
             <tr>
                 <td><a href="{{ article.url }}" target="_blank">
-                    {% if language == 'cn' %}
-                        {{ article.title|truncate(20, True) }}
+                    {% if article.title_language == 'cn' %}
+                        {{ article.title|truncate(18, True) }}
                     {% else %}
                         {{ article.title|truncate(35, True) }}
                     {% endif %}

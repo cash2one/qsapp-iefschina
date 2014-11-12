@@ -84,7 +84,7 @@ class ChannelModel(db.Model):
         order_by=articles_order_by,
         foreign_keys='[ArticleModel.cid]',
         backref=db.backref(
-            'channel', lazy='joined', innerjoin=True),
+            'channel', lazy='subquery', innerjoin=True),
         passive_deletes='all', lazy='dynamic')
 
     @property

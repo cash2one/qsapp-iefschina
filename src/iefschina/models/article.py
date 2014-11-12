@@ -38,7 +38,8 @@ class ArticleModel(db.Model):
     __tablename__ = 'article'
 
     id = db.Column(db.Integer(), nullable=False, primary_key=True)
-    cid = db.Column('channel_id', db.Integer(), nullable=False, index=True)
+    cid = db.Column('channel_id', db.Integer(), 
+                    db.ForeignKey('channel.id'), nullable=False, index=True)
     is_sticky = db.Column(db.Boolean(), nullable=False,
                                         server_default=sql.false())
     title = db.Column(db.Unicode(64), nullable=False, unique=True, index=True)
@@ -60,6 +61,13 @@ class ArticleModel(db.Model):
     @property
     def language(self):
         return self.channel.language
+
+    @property
+    def title_language(self):
+        if re.match(REGEX, self.title):
+            return 'en'
+        else:
+            return 'cn'
 
     @property
     def url(self):
