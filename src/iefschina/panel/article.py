@@ -35,13 +35,11 @@ class Article(ModelView):
 
     def create_form(self, obj=None):
         form = super(Article, self).create_form()
-        delattr(form, 'cid')
         delattr(form, 'date_created')
         return form
 
     def edit_form(self, obj=None):
         form = super(Article, self).edit_form(obj=obj)
-        delattr(form, 'cid')
         delattr(form, 'date_created')
         return form
 
