@@ -11,7 +11,7 @@ from sqlalchemy.ext.hybrid import hybrid_property
 
 from studio.core.engines import db
 #from iefschina.contrib.helpers import REGEX
-REGEX = r'[a-zA-Z\b]+'
+REGEX = r'^[a-zA-Z\b]+'
 
 __all__ = [
     'SlideModel',
@@ -38,7 +38,7 @@ class ArticleModel(db.Model):
     __tablename__ = 'article'
 
     id = db.Column(db.Integer(), nullable=False, primary_key=True)
-    cid = db.Column('channel_id', db.Integer(), 
+    cid = db.Column('channel_id', db.Integer(),
                     db.ForeignKey('channel.id'), nullable=False, index=True)
     is_sticky = db.Column(db.Boolean(), nullable=False,
                                         server_default=sql.false())
@@ -64,7 +64,7 @@ class ArticleModel(db.Model):
 
     @property
     def title_language(self):
-        if re.match(REGEX, self.title):
+        if re.match(REGEX, self.title.strip()):
             return 'en'
         else:
             return 'cn'

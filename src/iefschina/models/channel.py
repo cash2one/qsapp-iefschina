@@ -9,7 +9,7 @@ from sqlalchemy.ext.hybrid import hybrid_property
 
 from iefschina.models.article import ArticleModel
 #from iefschina.contrib.helpers import REGEX
-REGEX = r'[a-zA-Z\b]+'
+REGEX = r'^[a-zA-Z\b]+'
 
 __all__ = [
     'NaviChannelModel',
@@ -90,7 +90,7 @@ class ChannelModel(db.Model):
     @property
     def language(self):
         c = re.compile(REGEX)
-        if c.match(self.name):
+        if c.match(self.name.strip()):
             return 'en'
         else:
             return 'cn'

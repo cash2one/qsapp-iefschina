@@ -16,7 +16,13 @@
 	            {% for article in channel.articles[(pager.page-1)*pager.per_page:pager.page*pager.per_page] %}
 	            <a href="{{ article.url }}" target="_blank">
 	            <tr>
-	                <td><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></td>
+	                <td><a href="{{ article.url }}" target="_blank">
+						{% if article.title_language == 'cn' %}
+						    {{ article.title|truncate(40, True) }}
+						{% else %}
+						    {{ article.title|truncate(40, True) }}
+						{% endif %}
+					</a></td>
 	                <td>{{ article.date_published|strfdate }}</td>
 	            </tr>
 	            </a>

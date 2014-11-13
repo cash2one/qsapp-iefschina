@@ -31,7 +31,7 @@ slide_str = '''
 				{% if slide.describe %}<p>{{ slide.describe }}</p>{% endif %}
              {% if slide.link %}<a class="btn" href="{{ slide.link }}" target="_blank">&nbsp;</a>{% endif %}
 			</div>
-            
+
        	</li>
        	{% endfor %}
    	</ul>
@@ -60,7 +60,7 @@ event_str = '''
     </div>
 </div>
 '''
- 
+
 
 latest_str = '''
 <div class="panel panel-default">
@@ -81,7 +81,6 @@ latest_str = '''
                     {% else %}
                         {{ article.title|truncate(35, True) }}
                     {% endif %}
-
                 </a></td>
             </tr>
             </a>

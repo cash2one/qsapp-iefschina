@@ -20,7 +20,13 @@
 	                    <tbody>
 	                        {% for article in channel.articles[:5] %}
 	                        <tr>
-	                            <td><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></td>
+	                            <td><a href="{{ article.url }}" target="_blank">
+									{% if article.title_language == 'cn' %}
+									    {{ article.title|truncate(30, True) }}
+									{% else %}
+									    {{ article.title|truncate(30, True) }}
+									{% endif %}
+								</a></td>
 	                            <td>{{ article.date_published|strfdate }}</td>
 	                        </tr>
 	                        {% endfor %}
