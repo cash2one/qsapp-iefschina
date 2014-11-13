@@ -13,7 +13,7 @@ navi_str = '''
 {% if language=='cn' %}
     <li class=""><a href="{{ url_for('views.index', language='cn') }}">首页</a></li>
 {% else %}
-    <li class=""><a href="{{ url_for('views.index', language='en') }}">Homepage</a></li>
+    <li class=""><a href="{{ url_for('views.index', language='en') }}">Home</a></li>
 {% endif %}
 {% for channel in navi.channels %}
     <li class=""><a href="{{ channel.url }}">{{ channel.name }}</a></li>
@@ -29,7 +29,7 @@ slide_str = '''
        		<div class="inner">
 				{% if slide.title %}<h1>{{ slide.title }}</h1>{% endif %}
 				{% if slide.describe %}<p>{{ slide.describe }}</p>{% endif %}
-                <a class="btn" href="{{ slide.link }}" target="_blank">&nbsp;</a>
+             {% if slide.link %}<a class="btn" href="{{ slide.link }}" target="_blank">&nbsp;</a>{% endif %}
 			</div>
             
        	</li>
