@@ -17,7 +17,7 @@ dist
 .sass-cache
 bower_components
 test/bower_components
-src/express/static/
+src/iefschina/static/
 static-src/bower_components
 static-src/styles/*.css
 *.log
